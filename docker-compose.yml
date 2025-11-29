@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    image: eureka
+    restart: always
+    container_name: eureka
+    ports:
+      - '8761:8761'
+    networks:
+      - dockernetflix-network
+
+  gateway-service:
+    image: gateway
+    restart: always
+    container_name: gateway
+    ports:
+      - '7000:8080'
+    networks:
+      - dockernetflix-network
+    depends_on:
+      - eureka-server
+
+  greeting-microservice:
+    image: greetmicroservice
+    restart: always
+    container_name: greetmicroservice
+    networks:
+      - dockernetflix-network
+    depends_on:
+      - eureka-server
+
+networks:
+  dockernetflix-network:

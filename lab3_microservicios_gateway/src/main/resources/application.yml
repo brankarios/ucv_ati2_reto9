@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: mi-servicio
+          uri: lb://GREETING-MICROSERVICE
+          predicates:
+            - Path=/greeting-service/**
+          filters:
+            - RewritePath=/greeting-service/(?<segment>.*), /$\{segment}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    instance:
+      prefer-ip-address: true

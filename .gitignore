@@ -1,0 +1,13 @@
+**/target/
+**/mvnw
+**/mvnw.cmd
+**/.mvn
+
+**/.idea/
+**/*.iml
+**/.vscode/
+
+**/.DS_Store
+**/Thumbs.db
+
+**/*.log
